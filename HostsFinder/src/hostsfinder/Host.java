@@ -14,11 +14,13 @@ public class Host {
     private String mac;
     private String desenvolvedor;
     private String tipoHost;
+    private int timeOn;
 
     public Host(String ip, String mac, String tipoHost) {
         this.ip = ip;
         this.mac = mac;
         this.tipoHost = tipoHost;
+        timeOn = 0;
     }
 
     public String getIp() {
@@ -51,6 +53,14 @@ public class Host {
 
     public void setTipoHost(String tipoHost) {
         this.tipoHost = tipoHost;
+    }
+
+    public int getTimeOn() {
+        return timeOn;
+    }
+
+    public void setTimeOn(int timeOn) {
+        this.timeOn = timeOn;
     }
     
 }
