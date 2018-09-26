@@ -5,6 +5,8 @@
  */
 package Models;
 
+import hostsfinder.HostsFinder;
+
 /**
  *
  * @author Clecio
@@ -40,8 +42,7 @@ public class Host {
 
     public void setMac(String mac) {
         this.mac = mac;
-        String desenvolvedorMac = mac.substring(0,10);
-        //-------------------------------------------------------------------------
+        setDesenvolvedor(HostsFinder.LeituraCSV(mac));
     }
 
     public String getDesenvolvedor() {

@@ -6,6 +6,10 @@
 package hostsfinder;
 import Models.Host;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,7 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 /**
  *
  * @author Clecio
@@ -51,7 +54,7 @@ public class HostsFinder extends Thread{
                         String tipo="Host";
                         System.out.println(camposLine.get(0) +"=="+ (gateway));
                         if((" "+camposLine.get(0)).equals(gateway))
-                            tipo = "Roter";
+                            tipo = "Router";
                         Host h = new Host(camposLine.get(0),camposLine.get(1),tipo);
                         hosts.add(h);
                     }
@@ -86,7 +89,33 @@ public class HostsFinder extends Thread{
         }   
         return hostsNew;
     }
-    
+public static String LeituraCSV(String mac){
+    String fabricante = "Indefinido";
+    mac = mac.substring(0,8);
+    System.out.println(mac);
+    try {
+    BufferedReader StrR = new BufferedReader(new FileReader("src\\mac-vendor.csv"));
+
+    String Str;
+    String[] TableLine;
+
+    while((Str = StrR.readLine())!= null){
+        TableLine = Str.split(",");
+        if(mac.equalsIgnoreCase(TableLine[0])){
+                fabricante = TableLine[1];
+                return fabricante;
+            }
+    }
+    StrR.close();
+    }
+    catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
+    catch (IOException ex){
+        ex.printStackTrace();
+    }
+    return fabricante;
+}
     
     
     @Override
