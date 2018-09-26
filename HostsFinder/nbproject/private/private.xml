@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/E:/Clecio/UFSM/semestre%207/Gerencia%20de%20redes/Hosts-Finder/HostsFinder/src/hostsfinder/Util.java</file>
             <file>file:/E:/Clecio/UFSM/semestre%207/Gerencia%20de%20redes/Hosts-Finder/HostsFinder/src/hostsfinder/JFShowHosts.java</file>
+            <file>file:/E:/Clecio/UFSM/semestre%207/Gerencia%20de%20redes/Hosts-Finder/HostsFinder/src/CRUDS/CrudConexao.java</file>
             <file>file:/E:/Clecio/UFSM/semestre%207/Gerencia%20de%20redes/Hosts-Finder/HostsFinder/src/hostsfinder/HostsFinder.java</file>
-            <file>file:/E:/Clecio/UFSM/semestre%207/Gerencia%20de%20redes/Hosts-Finder/HostsFinder/src/hostsfinder/Host.java</file>
+            <file>file:/E:/Clecio/UFSM/semestre%207/Gerencia%20de%20redes/Hosts-Finder/HostsFinder/src/Models/Conexao.java</file>
+            <file>file:/E:/Clecio/UFSM/semestre%207/Gerencia%20de%20redes/Hosts-Finder/HostsFinder/src/Models/Host.java</file>
+            <file>file:/E:/Clecio/UFSM/semestre%207/Gerencia%20de%20redes/Hosts-Finder/HostsFinder/src/CRUDS/CrudHost.java</file>
         </group>
     </open-files>
 </project-private>

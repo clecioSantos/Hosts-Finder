@@ -6,7 +6,7 @@
 package hostsfinder;
 
 import java.util.ArrayList;
-import hostsfinder.Host;
+import Models.Host;
 import java.awt.Component;
 import javafx.scene.control.TableCell;
 import javax.swing.table.DefaultTableModel;

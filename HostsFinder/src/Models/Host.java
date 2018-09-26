@@ -3,26 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hostsfinder;
+package Models;
 
 /**
  *
  * @author Clecio
  */
 public class Host {
-    private String ip;
+    private String ip; //ip atual
     private String mac;
     private String desenvolvedor;
     private String tipoHost;
     private int timeOn;
+    private int id;
+    private String nome;
 
     public Host(String ip, String mac, String tipoHost) {
         this.ip = ip;
-        this.mac = mac;
+        setMac(mac);
         this.tipoHost = tipoHost;
         timeOn = 0;
     }
-
+    public Host(){
+    }
     public String getIp() {
         return ip;
     }
@@ -37,6 +40,8 @@ public class Host {
 
     public void setMac(String mac) {
         this.mac = mac;
+        String desenvolvedorMac = mac.substring(0,10);
+        //-------------------------------------------------------------------------
     }
 
     public String getDesenvolvedor() {
@@ -61,6 +66,22 @@ public class Host {
 
     public void setTimeOn(int timeOn) {
         this.timeOn = timeOn;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
     
 }
