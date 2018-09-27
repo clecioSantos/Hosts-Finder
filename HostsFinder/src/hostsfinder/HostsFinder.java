@@ -78,14 +78,28 @@ public class HostsFinder extends Thread{
     }
     
     private static ArrayList<Host> AtualizaHosts(ArrayList<Host> hostsNew, ArrayList<Host> hostsOld){
+        
         if(hostsOld != null){
+            for(Host h : hostsOld){
+                h.setStatus("Offline");
+            }
             for(Host host : hostsNew){
+                boolean exists = false;
                 for(Host h : hostsOld){
                     if(h.getMac().equals(host.getMac())){
-                        host.setTimeOn(h.getTimeOn());
+                        exists = true;
+                        h.setStatus("Online");
                     }
                 }
+                if(!exists){
+                    hostsOld.add(host);
+                }
             }   
+            return hostsOld;
+        }else{
+            for(Host host : hostsNew){
+                host.setStatus("Online");
+            }
         }
         return hostsNew;
     }
@@ -125,23 +139,20 @@ public static String LeituraCSV(String mac){
             DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
             int num = 0;
             int i = 0;
+            while(dtm.getRowCount()>0){
+                dtm.removeRow(0);
+            }
             for(i = 0 ; i < hosts.size() ; i++){
                 num++;
-                String[] rowData = new String[6];
+                String[] rowData = new String[7];
                 rowData[0] = num + "";
                 rowData[1] = hosts.get(i).getIp();
                 rowData[2] = hosts.get(i).getMac();
                 rowData[3] = hosts.get(i).getDesenvolvedor();
                 rowData[4] = (hosts.get(i).getTimeOn());
                 rowData[5] = hosts.get(i).getTipoHost();
-                if(i < dtm.getRowCount())
-                    dtm.removeRow(i);
+                rowData[6] = hosts.get(i).getStatus();
                 dtm.addRow(rowData);
-            }
-            if(i<dtm.getRowCount()){
-                for(; i<dtm.getRowCount();i++){
-                    dtm.removeRow(i);
-                }
             }
             jTable.setModel(dtm);
             try {

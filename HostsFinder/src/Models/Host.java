@@ -21,7 +21,7 @@ public class Host {
     private String timeOn;
     private int id;
     private String nome;
-
+    private String status;
     public Host(String ip, String mac, String tipoHost) {
         this.ip = ip;
         setMac(mac);
@@ -90,6 +90,14 @@ public class Host {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     
 }

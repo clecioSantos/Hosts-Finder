@@ -45,11 +45,11 @@ public class JFShowHosts extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Num", "IP", "MAC", "Fabricante", "Time on", "Type"
+                "Num", "IP", "MAC", "Fabricante", "Time on", "Type", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
