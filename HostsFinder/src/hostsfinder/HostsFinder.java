@@ -38,7 +38,6 @@ public class HostsFinder extends Thread{
         try {
             String output = runCMD("arp -a");
             String[] splitted = output.split("\n");
-            System.out.println(getDefaultGateway());
             String gateway = getDefaultGateway();
             int numLinha = 0;
             for (String portion : splitted) {
@@ -52,7 +51,6 @@ public class HostsFinder extends Thread{
                 if(numLinha >= 2){
                     if(camposLine.get(2).contains("din")){
                         String tipo="Host";
-                        System.out.println(camposLine.get(0) +"=="+ (gateway));
                         if((" "+camposLine.get(0)).equals(gateway))
                             tipo = "Router";
                         Host h = new Host(camposLine.get(0),camposLine.get(1),tipo);
@@ -64,7 +62,7 @@ public class HostsFinder extends Thread{
         } catch (IOException ex) {
                 System.err.println(ex.getMessage());
         }
-        return hosts;
+        return AtualizaHosts(hosts, hostsOld);
     }
     //executa o comando arp com a flag especificada e retorna uma String com a resposta do protocolo
     private static String runCMD(String flag) throws IOException{
@@ -80,19 +78,20 @@ public class HostsFinder extends Thread{
     }
     
     private static ArrayList<Host> AtualizaHosts(ArrayList<Host> hostsNew, ArrayList<Host> hostsOld){
-        for(Host host : hostsNew){
-            for(Host h : hostsOld){
-                if(h.getMac().equals(host.getMac())){
-                    host.setTimeOn(h.getTimeOn()+timeSleep);
+        if(hostsOld != null){
+            for(Host host : hostsNew){
+                for(Host h : hostsOld){
+                    if(h.getMac().equals(host.getMac())){
+                        host.setTimeOn(h.getTimeOn());
+                    }
                 }
-            }
-        }   
+            }   
+        }
         return hostsNew;
     }
 public static String LeituraCSV(String mac){
     String fabricante = "Indefinido";
     mac = mac.substring(0,8);
-    System.out.println(mac);
     try {
     BufferedReader StrR = new BufferedReader(new FileReader("src\\mac-vendor.csv"));
 
@@ -123,18 +122,26 @@ public static String LeituraCSV(String mac){
         String[] coluns = {"Num","IP","MAC","Fabricante","Time on","Type"};
         while(true){
             hosts = HostsFinder.getHosts(hosts);
-            DefaultTableModel dtm = new DefaultTableModel(coluns, 0);
+            DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
             int num = 0;
-            for(int i = 0 ; i < hosts.size() ; i++){
+            int i = 0;
+            for(i = 0 ; i < hosts.size() ; i++){
                 num++;
                 String[] rowData = new String[6];
                 rowData[0] = num + "";
                 rowData[1] = hosts.get(i).getIp();
                 rowData[2] = hosts.get(i).getMac();
                 rowData[3] = hosts.get(i).getDesenvolvedor();
-                rowData[4] = (hosts.get(i).getTimeOn()/1000)+" Segundos";
+                rowData[4] = (hosts.get(i).getTimeOn());
                 rowData[5] = hosts.get(i).getTipoHost();
+                if(i < dtm.getRowCount())
+                    dtm.removeRow(i);
                 dtm.addRow(rowData);
+            }
+            if(i<dtm.getRowCount()){
+                for(; i<dtm.getRowCount();i++){
+                    dtm.removeRow(i);
+                }
             }
             jTable.setModel(dtm);
             try {

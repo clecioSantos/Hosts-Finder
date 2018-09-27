@@ -45,11 +45,11 @@ public class JFShowHosts extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Num", "IP", "MAC", "Fabricante", "Time on"
+                "Num", "IP", "MAC", "Fabricante", "Time on", "Type"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -58,11 +58,10 @@ public class JFShowHosts extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable);
         if (jTable.getColumnModel().getColumnCount() > 0) {
-            jTable.getColumnModel().getColumn(0).setResizable(false);
-            jTable.getColumnModel().getColumn(1).setResizable(false);
-            jTable.getColumnModel().getColumn(2).setResizable(false);
-            jTable.getColumnModel().getColumn(3).setResizable(false);
-            jTable.getColumnModel().getColumn(4).setResizable(false);
+            jTable.getColumnModel().getColumn(0).setPreferredWidth(7);
+            jTable.getColumnModel().getColumn(1).setPreferredWidth(10);
+            jTable.getColumnModel().getColumn(4).setPreferredWidth(15);
+            jTable.getColumnModel().getColumn(5).setPreferredWidth(15);
         }
 
         jButton1.setText("Carregar");

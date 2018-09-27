@@ -6,6 +6,8 @@
 package Models;
 
 import hostsfinder.HostsFinder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -16,7 +18,7 @@ public class Host {
     private String mac;
     private String desenvolvedor;
     private String tipoHost;
-    private int timeOn;
+    private String timeOn;
     private int id;
     private String nome;
 
@@ -24,9 +26,10 @@ public class Host {
         this.ip = ip;
         setMac(mac);
         this.tipoHost = tipoHost;
-        timeOn = 0;
+        setTimeOn();
     }
     public Host(){
+        setTimeOn();
     }
     public String getIp() {
         return ip;
@@ -61,12 +64,16 @@ public class Host {
         this.tipoHost = tipoHost;
     }
 
-    public int getTimeOn() {
+    public String getTimeOn() {
         return timeOn;
     }
 
-    public void setTimeOn(int timeOn) {
+    public void setTimeOn(String timeOn) {
         this.timeOn = timeOn;
+    }
+    public void setTimeOn() {
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+        this.timeOn = sdf.format(new Date());
     }
 
     public int getId() {
