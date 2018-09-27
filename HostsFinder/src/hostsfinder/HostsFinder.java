@@ -17,7 +17,9 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -26,10 +28,12 @@ import javax.swing.table.DefaultTableModel;
 public class HostsFinder extends Thread{
 
     private JTable jTable;
+    private JTextField sleepTimer;
     private static int timeSleep = 5000;
     private static ArrayList<Host> hosts = null;
-    public HostsFinder(JTable jTable) {
+    public HostsFinder(JTable jTable, JTextField sleepTimer) {
         this.jTable = jTable;
+        this.sleepTimer = sleepTimer;
     }
     
     //Busca os Hosts da rede e os organiza em uma List<Hosts>
@@ -156,6 +160,15 @@ public static String LeituraCSV(String mac){
             }
             jTable.setModel(dtm);
             try {
+                String numValid = "0123456789";
+                String sleep = sleepTimer.getText();
+                sleepTimer.setText("0");
+                for(int j = 0 ; j < sleep.length() ; j++){
+                    if(numValid.contains(sleep.charAt(j)+""))
+                        sleepTimer.setText(sleepTimer.getText() + sleep.charAt(j));
+                }
+                timeSleep = Integer.parseInt(sleepTimer.getText());
+                sleepTimer.setText(timeSleep+"");
                 Thread.sleep(timeSleep);
             } catch (InterruptedException ex) {
                 Logger.getLogger(HostsFinder.class.getName()).log(Level.SEVERE, null, ex);
