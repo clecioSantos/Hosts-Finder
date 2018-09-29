@@ -78,6 +78,7 @@ public class JFShowHosts extends javax.swing.JFrame {
 
         jLabel2.setText("Sllep (milissegundos):");
 
+        sleepTime.setText("20000");
         sleepTime.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }

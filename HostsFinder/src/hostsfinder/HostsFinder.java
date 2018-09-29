@@ -58,6 +58,7 @@ public class HostsFinder extends Thread{
                         if((" "+camposLine.get(0)).equals(gateway))
                             tipo = "Router";
                         Host h = new Host(camposLine.get(0),camposLine.get(1),tipo);
+                        runCMD("ping " + h.getIp());
                         hosts.add(h);
                     }
                 }
@@ -162,13 +163,23 @@ public static String LeituraCSV(String mac){
             try {
                 String numValid = "0123456789";
                 String sleep = sleepTimer.getText();
-                sleepTimer.setText("0");
+                boolean temLetra = false;
                 for(int j = 0 ; j < sleep.length() ; j++){
-                    if(numValid.contains(sleep.charAt(j)+""))
-                        sleepTimer.setText(sleepTimer.getText() + sleep.charAt(j));
+                    if(!numValid.contains(sleep.charAt(j)+"")){
+                        temLetra = true;
+                    }
+                }
+                if(temLetra){
+                    sleepTimer.setText("0");
+                    for(int j = 0 ; j < sleep.length() ; j++){
+                        if(numValid.contains(sleep.charAt(j)+"")){
+                            sleepTimer.setText(sleepTimer.getText() + sleep.charAt(j));
+                        }
+                    }
                 }
                 timeSleep = Integer.parseInt(sleepTimer.getText());
-                sleepTimer.setText(timeSleep+"");
+                if(temLetra)
+                    sleepTimer.setText(timeSleep+"");
                 Thread.sleep(timeSleep);
             } catch (InterruptedException ex) {
                 Logger.getLogger(HostsFinder.class.getName()).log(Level.SEVERE, null, ex);
